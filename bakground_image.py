@@ -16,7 +16,9 @@ def set_background(root, image_path, bg_color='lightblue'):
             photo = ImageTk.PhotoImage(image)
 
             label = tk.Label(root, image=photo, bg=bg_color)
-            label.image = photo 
-            label.place(relx=0.5, rely=0.5, anchor='center')
+            label.image = photo  # Keep a reference
+            label.place(x=0, y=0, relwidth=1, relheight=1)
         except IOError:
-            print("Image cant be loaded, please check the file path.")
+            print("Image can't be loaded, please check the file path.")
+
+    root.after(100, resize_and_set_image)

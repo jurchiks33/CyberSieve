@@ -1,4 +1,5 @@
 import tkinter as tk
+from bakground_image import set_background
 
 root = tk.Tk()
 
@@ -14,5 +15,8 @@ center_y = int(screen_height / 2 - window_height / 2)
 root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 
 root.title("Web Scraping Tool")
+
+root.configure(bg='light blue')
+set_background(root, 'background_image.jpg')
 
 root.mainloop()

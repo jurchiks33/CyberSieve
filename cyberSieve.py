@@ -16,7 +16,6 @@ root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
 
 root.title("Web Scraping Tool")
 
-root.configure(bg='light blue')
-set_background(root, 'background_image.jpg')
+set_background(root, 'background_image.jpg') 
 
 root.mainloop()

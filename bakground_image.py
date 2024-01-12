@@ -2,23 +2,26 @@ import tkinter as tk
 from PIL import Image, ImageTk
 
 def set_background(root, image_path, bg_color='lightblue'):
-    def resize_and_set_image():
-        try:
-            # Make sure the window size is updated
-            root.update_idletasks()
-            # Now we can fetch the correct dimensions
-            window_width = root.winfo_width()
-            window_height = root.winfo_height()
-            
-            # Load and resize the image to fit the window
-            image = Image.open(image_path)
-            image = image.resize((window_width, window_height), Image.Resampling.LANCZOS)
-            photo = ImageTk.PhotoImage(image)
+    # Load the image
+    original_image = Image.open(image_path)
+    original_photo = ImageTk.PhotoImage(original_image)  # Keep a reference to avoid garbage collection
 
-            label = tk.Label(root, image=photo, bg=bg_color)
-            label.image = photo  # Keep a reference
-            label.place(x=0, y=0, relwidth=1, relheight=1)
-        except IOError:
-            print("Image can't be loaded, please check the file path.")
+    # Create a label and place it to cover the entire window
+    label = tk.Label(root, bg=bg_color)
+    label.place(x=0, y=0, relwidth=1, relheight=1)
 
-    root.after(100, resize_and_set_image)
+    def resize_image(event):
+        # Resize the image to match the new window size
+        new_image = original_image.resize((event.width, event.height), Image.Resampling.LANCZOS)
+        new_photo = ImageTk.PhotoImage(new_image)
+
+        # Set the resized image
+        label.config(image=new_photo)
+        label.image = new_photo  
+
+    # Initially set the image
+    label.config(image=original_photo)
+    label.image = original_photo
+
+    # Bind the resize_image function to the window's resize event
+    root.bind('<Configure>', resize_image)

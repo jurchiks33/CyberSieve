@@ -18,6 +18,13 @@ url_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 scrape_button = tk.Button(root, text="Scrape", command=start_scrapping)
 scrape_button.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
+#Table for data display.
+columns = ('column1', 'column2', 'column3')  #Replace with names when choosen ones.
+data_table = ttk.Treeview(root, columns, show='headings')
+for col in columns:
+    data_table.heading(col, text=col)
+data_table.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
+
 root = tk.Tk()
 
 screen_width = root.winfo_screenwidth()

@@ -3,12 +3,27 @@ from tkinter import ttk
 from bakground_image import set_background
 from screen_setup import setup_screen
 import pandas as pd
+import requests
+from bs4 import BeautifulSoup
 
 root = tk.Tk()
 
+    # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()
-    # Here will be web scrapping logic.
+    #Check if the URL is empty
+    if not url:
+        print({"No URL provided."})
+        return
+    try:
+        #Fetch content from URL.
+        response = requests.get(url)
+        response.raise_for_status()
+
+        #Parse the content with BeautifulSoup.
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+
     print(f"Scrapping {url}")
 
 def export_to_excel():

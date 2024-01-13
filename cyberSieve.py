@@ -1,5 +1,11 @@
 import tkinter as tk
 from bakground_image import set_background
+import pandas as pd
+
+def start_scrapping():
+    url = url_entry.get()
+    # Here will be web scrapping logic.
+    print(f"Scrapping {url}")
 
 root = tk.Tk()
 

@@ -22,7 +22,14 @@ def start_scrapping():
 
         #Parse the content with BeautifulSoup.
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
+        paragraphs = soup.find_all('p')
+        for para in paragraphs:
+            print(para.get_text())
+    
+    except requests.RequestException as e:
+        print(f"Error during requests to {url}: {e}")
+
 
     print(f"Scrapping {url}")
 

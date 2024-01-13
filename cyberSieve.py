@@ -7,6 +7,17 @@ def start_scrapping():
     # Here will be web scrapping logic.
     print(f"Scrapping {url}")
 
+def export_to_excel():
+    #Here is coming logic for export to excel.
+    print(f"Exporting data to Excel")
+
+#Set up GUI elements.
+url_entry = tk.Entry(root) #Entry widget for url.
+url_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
+
+scrape_button = tk.Button(root, text="Scrape", command=start_scrapping)
+scrape_button.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+
 root = tk.Tk()
 
 screen_width = root.winfo_screenwidth()

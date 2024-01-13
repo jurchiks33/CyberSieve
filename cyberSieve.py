@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 from bakground_image import set_background
 from screen_setup import setup_screen
+from scraper_logic import scrape_website
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -19,21 +20,9 @@ def start_scrapping():
         print("No URL provided.")
         return
 
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        paragraphs = soup.find_all('p')
-        for para in paragraphs:
-            text = para.get_text().strip()
-            if text: 
-            # put the whole paragraph in the first column, adjust later for data type.
-                data_table.insert('', 'end', values=(text, '', ''))
-
-    except requests.RequestException as e:
-        print(f"Error during requests to {url}: {e}")
+    scraped_data = scrape_website(url)
+    for text in scraped_data:
+        data_table.insert('', 'end', values=(text, '', ''))
 
 def export_to_excel():
     #Here is coming logic for export to excel.

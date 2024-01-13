@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from bakground_image import set_background
+from screen_setup import setup_screen
 import pandas as pd
 
 root = tk.Tk()
@@ -34,16 +35,7 @@ data_table.pack(side=tk.TOP, fill=tk.BOTH, expand=True)
 export_button = tk.Button(root, text="Export to Excel", command=export_to_excel)
 export_button.pack(side=tk.TOP, padx=10, pady=5)
 
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
-
-window_width = int(screen_width * 0.7)
-window_height = int(screen_height * 0.7)
-
-center_x = int(screen_width / 2 - window_width / 2)
-center_y = int(screen_height / 2 - window_height / 2)
-
-root.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+setup_screen(root)
 
 root.title("Web Scraping Tool")
 

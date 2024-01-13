@@ -11,27 +11,29 @@ root = tk.Tk()
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()
-    #Check if the URL is empty
+    # Clear existing data in the table
+    for i in data_table.get_children():
+        data_table.delete(i)
+
     if not url:
-        print({"No URL provided."})
+        print("No URL provided.")
         return
+
     try:
-        #Fetch content from URL.
         response = requests.get(url)
         response.raise_for_status()
 
-        #Parse the content with BeautifulSoup.
         soup = BeautifulSoup(response.text, 'html.parser')
 
         paragraphs = soup.find_all('p')
         for para in paragraphs:
-            print(para.get_text())
-    
+            text = para.get_text().strip()
+            if text: 
+            # put the whole paragraph in the first column, adjust later for data type.
+                data_table.insert('', 'end', values=(text, '', ''))
+
     except requests.RequestException as e:
         print(f"Error during requests to {url}: {e}")
-
-
-    print(f"Scrapping {url}")
 
 def export_to_excel():
     #Here is coming logic for export to excel.

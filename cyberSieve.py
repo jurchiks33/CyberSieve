@@ -9,6 +9,12 @@ from bs4 import BeautifulSoup
 
 root = tk.Tk()
 
+tag_options = ['p', 'div', 'h1', 'span', 'a']
+tag_var = tk.StringVar(root)
+tag_var.set(tag_options[0])
+tag_menu = tk.OptionMenu(root, tag_var, *tag_options)
+tag_menu.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()

@@ -21,6 +21,8 @@ keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()
+    selected_tag = tag_var.get()
+    keyword = keyword_entry.get()
     # Clear existing data in the table
     for i in data_table.get_children():
         data_table.delete(i)
@@ -29,7 +31,7 @@ def start_scrapping():
         print("No URL provided.")
         return
 
-    scraped_data = scrape_website(url)
+    scraped_data = scrape_website(url, selected_tag, keyword)
     for text in scraped_data:
         data_table.insert('', 'end', values=(text, '', ''))
 

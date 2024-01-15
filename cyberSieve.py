@@ -15,6 +15,9 @@ tag_var.set(tag_options[0])
 tag_menu = tk.OptionMenu(root, tag_var, *tag_options)
 tag_menu.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
+keyword_entry = tk.Entry(root)
+keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
+
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()

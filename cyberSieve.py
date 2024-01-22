@@ -36,15 +36,29 @@ url_entry.bind('<FocusIn>', lambda event: on_entry_click(event, url_entry, defau
 url_entry.bind('<FocusOut>', lambda event: on_focusout(event, url_entry, default_url_text))
 url_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
+#Entry with placeholder for CSS selector.
+default_css_selector_text = 'Enter CSS selector...'
+css_selector_entry = tk.Entry(root, fg='grey')
+css_selector_entry.insert(0, default_css_selector_text)
+css_selector_entry.bind('<FocusIn>', lambda event: on_entry_click(event, css_selector_entry, default_css_selector_text))
+css_selector_entry.bind('<FocusOut>', lambda event: on_focusout(event, css_selector_entry, default_css_selector_text))
+css_selector_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+
 keyword_entry = tk.Entry(root)
 keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
     # Here will be web scrapping logic.
 def start_scrapping():
-    url = url_entry.get()
-    selected_tag = tag_var.get()
-    css_selector = css_selector_entry.get()
-    keyword = keyword_entry.get()
+    url = url_entry.get().strip()
+    selected_tag = tag_var.get().strip()
+    css_selector = css_selector_entry.get().strip()
+    keyword = keyword_entry.get().strip()
+
+    if url == default_url_text:  # Check if default text is present
+            print("Please enter a URL.")
+            return
+    if css_selector == default_css_selector_text:  # Reset CSS selector if default text is present
+            css_selector = ''
 
     # Clear existing data in the table
     for i in data_table.get_children():
@@ -62,7 +76,8 @@ def start_scrapping():
                                   keyword=keyword if keyword else None,
                                   css_selector=css_selector if css_selector else None)
     for text in scraped_data:
-        data_table.insert('', 'end', values=(text, '', ''))
+        if text:
+            data_table.insert('', 'end', values=(text, '', ''))
 
 def export_to_excel():
     #Here is coming logic for export to excel.

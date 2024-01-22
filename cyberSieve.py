@@ -10,8 +10,11 @@ from bs4 import BeautifulSoup
 root = tk.Tk()
 
 tag_options = ['p', 'div', 'h1', 'span', 'a']
+
 tag_var = tk.StringVar(root)
 tag_var.set(tag_options[0])
+
+#Dropdown for tag selection
 tag_menu = tk.OptionMenu(root, tag_var, *tag_options)
 tag_menu.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
@@ -21,8 +24,9 @@ keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()
-    selected_tag = tag_var.get
+    selected_tag = tag_var.get()
     css_selector = css_selector_entry.get()
+    keyword = keyword_entry.get()
 
     # Clear existing data in the table
     for i in data_table.get_children():
@@ -32,11 +36,12 @@ def start_scrapping():
         print("No URL provided.")
         return
 
-    if not css_selector and  not selected_tag:
+    if not css_selector and not selected_tag:
         print("tag or CSS selector is required")
         return
 
     scraped_data = scrape_website(url, tag=selected_tag if selected_tag else None, 
+                                  keyword=keyword if keyword else None,
                                   css_selector=css_selector if css_selector else None)
     for text in scraped_data:
         data_table.insert('', 'end', values=(text, '', ''))

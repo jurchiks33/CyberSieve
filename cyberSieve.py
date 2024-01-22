@@ -32,6 +32,9 @@ tag_menu.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 default_url_text = 'Enter URL here...'
 url_entry = tk.Entry(root, fg='grey')
 url_entry.insert(0, default_url_text)
+url_entry.bind('<FocusIn>', lambda event: on_entry_click(event, url_entry, default_url_text))
+url_entry.bind('<FocusOut>', lambda event: on_focusout(event, url_entry, default_url_text))
+url_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
 keyword_entry = tk.Entry(root)
 keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)

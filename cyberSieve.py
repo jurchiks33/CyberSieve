@@ -43,6 +43,9 @@ def export_to_excel():
 url_entry = tk.Entry(root) #Entry widget for url.
 url_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 
+css_selector_entry = tk.Entry(root)
+css_selector_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
+
 scrape_button = tk.Button(root, text="Scrape", command=start_scrapping)
 scrape_button.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 

@@ -28,6 +28,11 @@ tag_var.set(tag_options[0])
 tag_menu = tk.OptionMenu(root, tag_var, *tag_options)
 tag_menu.pack(side=tk.TOP, fill=tk.X, padx=10, pady=5)
 
+#Entry with placeholder for URL
+default_url_text = 'Enter URL here...'
+url_entry = tk.Entry(root, fg='grey')
+url_entry.insert(0, default_url_text)
+
 keyword_entry = tk.Entry(root)
 keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
 

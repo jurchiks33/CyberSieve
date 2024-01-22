@@ -14,4 +14,10 @@ def scrape_website(url, tag=None, keyword=None, css_selector=None):
             if keyword:
                 elements = [el for el in elements if keyword.lower() in el.get_text().lower()]
         else:
-            return []   
+            return [] 
+
+        return [element.get_text().strip() for element in elements]
+
+    except requests.RequestException as e:
+        print(f"Error during requests to {url}: {e}")
+        return []  

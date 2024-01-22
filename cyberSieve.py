@@ -21,16 +21,23 @@ keyword_entry.pack(side=tk.TOP, fill=tk.X, padx=10, pady=10)
     # Here will be web scrapping logic.
 def start_scrapping():
     url = url_entry.get()
+    selected_tag = tag_var.get
     css_selector = css_selector_entry.get()
+
     # Clear existing data in the table
     for i in data_table.get_children():
         data_table.delete(i)
 
-    if not url or not css_selector:
-        print("URL or CSS selector is missing")
+    if not url:
+        print("No URL provided.")
         return
 
-    scraped_data = scrape_website(url, css_selector)
+    if not css_selector and  not selected_tag:
+        print("tag or CSS selector is required")
+        return
+
+    scraped_data = scrape_website(url, tag=selected_tag if selected_tag else None, 
+                                  css_selector=css_selector if css_selector else None)
     for text in scraped_data:
         data_table.insert('', 'end', values=(text, '', ''))
 
